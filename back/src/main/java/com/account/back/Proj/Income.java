@@ -1,51 +1,65 @@
 package com.account.back.Proj;
 
-import javax.xml.crypto.Data;
+import java.util.Date;
 
-public class Income {    private Integer id;
-    private Double moneyNum;
-    private Data date;
+public class Income {
+    private Integer incomeId;
 
-    public Integer getId() {
-        return id;
+    private Double incomeMoneynum;
+
+    private Date incomeDate;
+
+    private String incomeUsage;
+
+    private String incomeRemark;
+
+    private Integer userId;
+
+    public Integer getIncomeId() {
+        return incomeId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIncomeId(Integer incomeId) {
+        this.incomeId = incomeId;
     }
 
-    public Double getMoneyNum() {
-        return moneyNum;
+    public Double getIncomeMoneynum() {
+        return incomeMoneynum;
     }
 
-    public void setMoneyNum(Double moneyNum) {
-        this.moneyNum = moneyNum;
+    public void setIncomeMoneynum(Double incomeMoneynum) {
+        this.incomeMoneynum = incomeMoneynum;
     }
 
-    public Data getDate() {
-        return date;
+    public Date getIncomeDate() {
+        return incomeDate;
     }
 
-    public void setDate(Data date) {
-        this.date = date;
+    public void setIncomeDate(Date incomeDate) {
+        this.incomeDate = incomeDate;
     }
 
-    public String getUsage() {
-        return usage;
+    public String getIncomeUsage() {
+        return incomeUsage;
     }
 
-    public void setUsage(String usage) {
-        this.usage = usage;
+    public void setIncomeUsage(String incomeUsage) {
+        this.incomeUsage = incomeUsage == null ? null : incomeUsage.trim();
     }
 
-    public String getRemark() {
-        return remark;
+    public String getIncomeRemark() {
+        return incomeRemark;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setIncomeRemark(String incomeRemark) {
+        this.incomeRemark = incomeRemark == null ? null : incomeRemark.trim();
     }
 
-    private String usage;
-    private String remark;
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 }

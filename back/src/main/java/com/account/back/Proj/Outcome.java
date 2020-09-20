@@ -1,52 +1,65 @@
 package com.account.back.Proj;
 
-import javax.xml.crypto.Data;
-import java.util.zip.DataFormatException;
+import java.util.Date;
 
 public class Outcome {
-    private Integer id;
-    private Double moneyNum;
-    private Data date;
-    private String usage;
-    private String remark;
+    private Integer outcomeId;
 
-    public Integer getId() {
-        return id;
+    private Double outcomeMoneynum;
+
+    private Date outcomeDate;
+
+    private String outcomeUsage;
+
+    private String outcomeRemark;
+
+    private Integer userId;
+
+    public Integer getOutcomeId() {
+        return outcomeId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setOutcomeId(Integer outcomeId) {
+        this.outcomeId = outcomeId;
     }
 
-    public Double getMoneyNum() {
-        return moneyNum;
+    public Double getOutcomeMoneynum() {
+        return outcomeMoneynum;
     }
 
-    public void setMoneyNum(Double moneyNum) {
-        this.moneyNum = moneyNum;
+    public void setOutcomeMoneynum(Double outcomeMoneynum) {
+        this.outcomeMoneynum = outcomeMoneynum;
     }
 
-    public Data getDate() {
-        return date;
+    public Date getOutcomeDate() {
+        return outcomeDate;
     }
 
-    public void setDate(Data date) {
-        this.date = date;
+    public void setOutcomeDate(Date outcomeDate) {
+        this.outcomeDate = outcomeDate;
     }
 
-    public String getUsage() {
-        return usage;
+    public String getOutcomeUsage() {
+        return outcomeUsage;
     }
 
-    public void setUsage(String usage) {
-        this.usage = usage;
+    public void setOutcomeUsage(String outcomeUsage) {
+        this.outcomeUsage = outcomeUsage == null ? null : outcomeUsage.trim();
     }
 
-    public String getRemark() {
-        return remark;
+    public String getOutcomeRemark() {
+        return outcomeRemark;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setOutcomeRemark(String outcomeRemark) {
+        this.outcomeRemark = outcomeRemark == null ? null : outcomeRemark.trim();
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

@@ -1,63 +1,68 @@
 package com.account.back.Proj;
 
-import javax.xml.crypto.Data;
 import java.util.Date;
 
 public class Debt {
-    private Integer id;
-    private String name;
-    private String account;
-    private Double moneyNum;
-    private Date date;
-    private String remark;
+    private Integer debtId;
+
+    private String debtName;
+
+    private String debtAccount;
+
+    private Double debtMoneynum;
+
+    private Date debtDate;
+
+    private String debtRemark;
+
     private Integer userId;
 
-    public Integer getId() {
-        return id;
+    public Integer getDebtId() {
+        return debtId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setDebtId(Integer debtId) {
+        this.debtId = debtId;
     }
 
-    public String getName() {
-        return name;
+    public String getDebtName() {
+        return debtName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDebtName(String debtName) {
+        this.debtName = debtName == null ? null : debtName.trim();
     }
 
-    public String getAccount() {
-        return account;
+    public String getDebtAccount() {
+        return debtAccount;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setDebtAccount(String debtAccount) {
+        this.debtAccount = debtAccount == null ? null : debtAccount.trim();
     }
 
-    public Double getMoneyNum() {
-        return moneyNum;
+    public Double getDebtMoneynum() {
+        return debtMoneynum;
     }
 
-    public void setMoneyNum(Double moneyNum) {
-        this.moneyNum = moneyNum;
+    public void setDebtMoneynum(Double debtMoneynum) {
+        this.debtMoneynum = debtMoneynum;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDebtDate() {
+        return debtDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDebtDate(Date debtDate) {
+        this.debtDate = debtDate;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getDebtRemark() {
+        return debtRemark;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setDebtRemark(String debtRemark) {
+        this.debtRemark = debtRemark == null ? null : debtRemark.trim();
     }
 
     public Integer getUserId() {

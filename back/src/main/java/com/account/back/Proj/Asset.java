@@ -1,51 +1,56 @@
 package com.account.back.Proj;
 
 public class Asset {
-    private Integer id;
-    private String name;
-    private String account;
-    private Double moneyNum;
-    private String reamrk;
+    private Integer assetId;
+
+    private String assetName;
+
+    private String assetAccount;
+
+    private Double assetMoneynum;
+
+    private String assetRemark;
+
     private Integer userId;
 
-    public Integer getId() {
-        return id;
+    public Integer getAssetId() {
+        return assetId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setAssetId(Integer assetId) {
+        this.assetId = assetId;
     }
 
-    public String getName() {
-        return name;
+    public String getAssetName() {
+        return assetName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAssetName(String assetName) {
+        this.assetName = assetName == null ? null : assetName.trim();
     }
 
-    public String getAccount() {
-        return account;
+    public String getAssetAccount() {
+        return assetAccount;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setAssetAccount(String assetAccount) {
+        this.assetAccount = assetAccount == null ? null : assetAccount.trim();
     }
 
-    public Double getMoneyNum() {
-        return moneyNum;
+    public Double getAssetMoneynum() {
+        return assetMoneynum;
     }
 
-    public void setMoneyNum(Double moneyNum) {
-        this.moneyNum = moneyNum;
+    public void setAssetMoneynum(Double assetMoneynum) {
+        this.assetMoneynum = assetMoneynum;
     }
 
-    public String getReamrk() {
-        return reamrk;
+    public String getAssetRemark() {
+        return assetRemark;
     }
 
-    public void setReamrk(String reamrk) {
-        this.reamrk = reamrk;
+    public void setAssetRemark(String assetRemark) {
+        this.assetRemark = assetRemark == null ? null : assetRemark.trim();
     }
 
     public Integer getUserId() {
