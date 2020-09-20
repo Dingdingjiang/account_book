@@ -1,0 +1,26 @@
+# 配置数据源
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/accountbook?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+
+# mybatis 配置
+mybatis:
+  type-aliases-package: com.account.back.proj
+  mapper-locations: classpath:com/account/back/mapper/*Mapper.xml
+
+#pagehelper 配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+#logger 配置
+logging:
+  file:
+    path: E://java_projrct/account_book/back/logger/springLog.log #记录日志的位置
+  level:
+    com.shixun.springboot_demo: debug
