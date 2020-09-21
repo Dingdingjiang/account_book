@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.account.back.Mapper.OutcomeMapper">
+  <resultMap id="BaseResultMap" type="com.account.back.Proj.Outcome">
+    <id column="Outcome_id" jdbcType="INTEGER" property="outcomeId" />
+    <result column="Outcome_moneyNum" jdbcType="DOUBLE" property="outcomeMoneynum" />
+    <result column="Outcome_date" jdbcType="TIMESTAMP" property="outcomeDate" />
+    <result column="Outcome_usage" jdbcType="VARCHAR" property="outcomeUsage" />
+    <result column="Outcome_remark" jdbcType="VARCHAR" property="outcomeRemark" />
+    <result column="User_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Outcome_id, Outcome_moneyNum, Outcome_date, Outcome_usage, Outcome_remark, User_id
+  </sql>
+  <select id="selectByExample" parameterType="com.account.back.Proj.OutcomeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from outcome
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from outcome
+    where Outcome_id = #{outcomeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from outcome
+    where Outcome_id = #{outcomeId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.account.back.Proj.OutcomeExample">
+    delete from outcome
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.account.back.Proj.Outcome">
+    insert into outcome (Outcome_id, Outcome_moneyNum, Outcome_date, 
+      Outcome_usage, Outcome_remark, User_id
+      )
+    values (#{outcomeId,jdbcType=INTEGER}, #{outcomeMoneynum,jdbcType=DOUBLE}, #{outcomeDate,jdbcType=TIMESTAMP}, 
+      #{outcomeUsage,jdbcType=VARCHAR}, #{outcomeRemark,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.account.back.Proj.Outcome">
+    insert into outcome
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="outcomeId != null">
+        Outcome_id,
+      </if>
+      <if test="outcomeMoneynum != null">
+        Outcome_moneyNum,
+      </if>
+      <if test="outcomeDate != null">
+        Outcome_date,
+      </if>
+      <if test="outcomeUsage != null">
+        Outcome_usage,
+      </if>
+      <if test="outcomeRemark != null">
+        Outcome_remark,
+      </if>
+      <if test="userId != null">
+        User_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="outcomeId != null">
+        #{outcomeId,jdbcType=INTEGER},
+      </if>
+      <if test="outcomeMoneynum != null">
+        #{outcomeMoneynum,jdbcType=DOUBLE},
+      </if>
+      <if test="outcomeDate != null">
+        #{outcomeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outcomeUsage != null">
+        #{outcomeUsage,jdbcType=VARCHAR},
+      </if>
+      <if test="outcomeRemark != null">
+        #{outcomeRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.account.back.Proj.OutcomeExample" resultType="java.lang.Long">
+    select count(*) from outcome
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update outcome
+    <set>
+      <if test="record.outcomeId != null">
+        Outcome_id = #{record.outcomeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.outcomeMoneynum != null">
+        Outcome_moneyNum = #{record.outcomeMoneynum,jdbcType=DOUBLE},
+      </if>
+      <if test="record.outcomeDate != null">
+        Outcome_date = #{record.outcomeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.outcomeUsage != null">
+        Outcome_usage = #{record.outcomeUsage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outcomeRemark != null">
+        Outcome_remark = #{record.outcomeRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        User_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update outcome
+    set Outcome_id = #{record.outcomeId,jdbcType=INTEGER},
+      Outcome_moneyNum = #{record.outcomeMoneynum,jdbcType=DOUBLE},
+      Outcome_date = #{record.outcomeDate,jdbcType=TIMESTAMP},
+      Outcome_usage = #{record.outcomeUsage,jdbcType=VARCHAR},
+      Outcome_remark = #{record.outcomeRemark,jdbcType=VARCHAR},
+      User_id = #{record.userId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.account.back.Proj.Outcome">
+    update outcome
+    <set>
+      <if test="outcomeMoneynum != null">
+        Outcome_moneyNum = #{outcomeMoneynum,jdbcType=DOUBLE},
+      </if>
+      <if test="outcomeDate != null">
+        Outcome_date = #{outcomeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outcomeUsage != null">
+        Outcome_usage = #{outcomeUsage,jdbcType=VARCHAR},
+      </if>
+      <if test="outcomeRemark != null">
+        Outcome_remark = #{outcomeRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        User_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Outcome_id = #{outcomeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.account.back.Proj.Outcome">
+    update outcome
+    set Outcome_moneyNum = #{outcomeMoneynum,jdbcType=DOUBLE},
+      Outcome_date = #{outcomeDate,jdbcType=TIMESTAMP},
+      Outcome_usage = #{outcomeUsage,jdbcType=VARCHAR},
+      Outcome_remark = #{outcomeRemark,jdbcType=VARCHAR},
+      User_id = #{userId,jdbcType=INTEGER}
+    where Outcome_id = #{outcomeId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.account.back.Mapper.AssetMapper">
+  <resultMap id="BaseResultMap" type="com.account.back.Proj.Asset">
+    <id column="Asset_id" jdbcType="INTEGER" property="assetId" />
+    <result column="Asset_name" jdbcType="VARCHAR" property="assetName" />
+    <result column="Asset_account" jdbcType="VARCHAR" property="assetAccount" />
+    <result column="Asset_moneyNum" jdbcType="DOUBLE" property="assetMoneynum" />
+    <result column="Asset_remark" jdbcType="VARCHAR" property="assetRemark" />
+    <result column="User_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Asset_id, Asset_name, Asset_account, Asset_moneyNum, Asset_remark, User_id
+  </sql>
+  <select id="selectByExample" parameterType="com.account.back.Proj.AssetExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from asset
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from asset
+    where Asset_id = #{assetId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from asset
+    where Asset_id = #{assetId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.account.back.Proj.AssetExample">
+    delete from asset
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.account.back.Proj.Asset">
+    insert into asset (Asset_id, Asset_name, Asset_account, 
+      Asset_moneyNum, Asset_remark, User_id
+      )
+    values (#{assetId,jdbcType=INTEGER}, #{assetName,jdbcType=VARCHAR}, #{assetAccount,jdbcType=VARCHAR}, 
+      #{assetMoneynum,jdbcType=DOUBLE}, #{assetRemark,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.account.back.Proj.Asset">
+    insert into asset
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="assetId != null">
+        Asset_id,
+      </if>
+      <if test="assetName != null">
+        Asset_name,
+      </if>
+      <if test="assetAccount != null">
+        Asset_account,
+      </if>
+      <if test="assetMoneynum != null">
+        Asset_moneyNum,
+      </if>
+      <if test="assetRemark != null">
+        Asset_remark,
+      </if>
+      <if test="userId != null">
+        User_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="assetId != null">
+        #{assetId,jdbcType=INTEGER},
+      </if>
+      <if test="assetName != null">
+        #{assetName,jdbcType=VARCHAR},
+      </if>
+      <if test="assetAccount != null">
+        #{assetAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="assetMoneynum != null">
+        #{assetMoneynum,jdbcType=DOUBLE},
+      </if>
+      <if test="assetRemark != null">
+        #{assetRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.account.back.Proj.AssetExample" resultType="java.lang.Long">
+    select count(*) from asset
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update asset
+    <set>
+      <if test="record.assetId != null">
+        Asset_id = #{record.assetId,jdbcType=INTEGER},
+      </if>
+      <if test="record.assetName != null">
+        Asset_name = #{record.assetName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assetAccount != null">
+        Asset_account = #{record.assetAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assetMoneynum != null">
+        Asset_moneyNum = #{record.assetMoneynum,jdbcType=DOUBLE},
+      </if>
+      <if test="record.assetRemark != null">
+        Asset_remark = #{record.assetRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        User_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update asset
+    set Asset_id = #{record.assetId,jdbcType=INTEGER},
+      Asset_name = #{record.assetName,jdbcType=VARCHAR},
+      Asset_account = #{record.assetAccount,jdbcType=VARCHAR},
+      Asset_moneyNum = #{record.assetMoneynum,jdbcType=DOUBLE},
+      Asset_remark = #{record.assetRemark,jdbcType=VARCHAR},
+      User_id = #{record.userId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.account.back.Proj.Asset">
+    update asset
+    <set>
+      <if test="assetName != null">
+        Asset_name = #{assetName,jdbcType=VARCHAR},
+      </if>
+      <if test="assetAccount != null">
+        Asset_account = #{assetAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="assetMoneynum != null">
+        Asset_moneyNum = #{assetMoneynum,jdbcType=DOUBLE},
+      </if>
+      <if test="assetRemark != null">
+        Asset_remark = #{assetRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        User_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Asset_id = #{assetId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.account.back.Proj.Asset">
+    update asset
+    set Asset_name = #{assetName,jdbcType=VARCHAR},
+      Asset_account = #{assetAccount,jdbcType=VARCHAR},
+      Asset_moneyNum = #{assetMoneynum,jdbcType=DOUBLE},
+      Asset_remark = #{assetRemark,jdbcType=VARCHAR},
+      User_id = #{userId,jdbcType=INTEGER}
+    where Asset_id = #{assetId,jdbcType=INTEGER}
+  </update>
+</mapper>

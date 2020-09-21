@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.account.back.Mapper.IncomeMapper">
+  <resultMap id="BaseResultMap" type="com.account.back.Proj.Income">
+    <id column="Income_id" jdbcType="INTEGER" property="incomeId" />
+    <result column="Income_moneyNum" jdbcType="DOUBLE" property="incomeMoneynum" />
+    <result column="Income_date" jdbcType="TIMESTAMP" property="incomeDate" />
+    <result column="Income_usage" jdbcType="VARCHAR" property="incomeUsage" />
+    <result column="Income_remark" jdbcType="VARCHAR" property="incomeRemark" />
+    <result column="User_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Income_id, Income_moneyNum, Income_date, Income_usage, Income_remark, User_id
+  </sql>
+  <select id="selectByExample" parameterType="com.account.back.Proj.IncomeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from income
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from income
+    where Income_id = #{incomeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from income
+    where Income_id = #{incomeId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.account.back.Proj.IncomeExample">
+    delete from income
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.account.back.Proj.Income">
+    insert into income (Income_id, Income_moneyNum, Income_date, 
+      Income_usage, Income_remark, User_id
+      )
+    values (#{incomeId,jdbcType=INTEGER}, #{incomeMoneynum,jdbcType=DOUBLE}, #{incomeDate,jdbcType=TIMESTAMP}, 
+      #{incomeUsage,jdbcType=VARCHAR}, #{incomeRemark,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.account.back.Proj.Income">
+    insert into income
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="incomeId != null">
+        Income_id,
+      </if>
+      <if test="incomeMoneynum != null">
+        Income_moneyNum,
+      </if>
+      <if test="incomeDate != null">
+        Income_date,
+      </if>
+      <if test="incomeUsage != null">
+        Income_usage,
+      </if>
+      <if test="incomeRemark != null">
+        Income_remark,
+      </if>
+      <if test="userId != null">
+        User_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="incomeId != null">
+        #{incomeId,jdbcType=INTEGER},
+      </if>
+      <if test="incomeMoneynum != null">
+        #{incomeMoneynum,jdbcType=DOUBLE},
+      </if>
+      <if test="incomeDate != null">
+        #{incomeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="incomeUsage != null">
+        #{incomeUsage,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeRemark != null">
+        #{incomeRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.account.back.Proj.IncomeExample" resultType="java.lang.Long">
+    select count(*) from income
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update income
+    <set>
+      <if test="record.incomeId != null">
+        Income_id = #{record.incomeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.incomeMoneynum != null">
+        Income_moneyNum = #{record.incomeMoneynum,jdbcType=DOUBLE},
+      </if>
+      <if test="record.incomeDate != null">
+        Income_date = #{record.incomeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.incomeUsage != null">
+        Income_usage = #{record.incomeUsage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.incomeRemark != null">
+        Income_remark = #{record.incomeRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        User_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update income
+    set Income_id = #{record.incomeId,jdbcType=INTEGER},
+      Income_moneyNum = #{record.incomeMoneynum,jdbcType=DOUBLE},
+      Income_date = #{record.incomeDate,jdbcType=TIMESTAMP},
+      Income_usage = #{record.incomeUsage,jdbcType=VARCHAR},
+      Income_remark = #{record.incomeRemark,jdbcType=VARCHAR},
+      User_id = #{record.userId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.account.back.Proj.Income">
+    update income
+    <set>
+      <if test="incomeMoneynum != null">
+        Income_moneyNum = #{incomeMoneynum,jdbcType=DOUBLE},
+      </if>
+      <if test="incomeDate != null">
+        Income_date = #{incomeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="incomeUsage != null">
+        Income_usage = #{incomeUsage,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeRemark != null">
+        Income_remark = #{incomeRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        User_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Income_id = #{incomeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.account.back.Proj.Income">
+    update income
+    set Income_moneyNum = #{incomeMoneynum,jdbcType=DOUBLE},
+      Income_date = #{incomeDate,jdbcType=TIMESTAMP},
+      Income_usage = #{incomeUsage,jdbcType=VARCHAR},
+      Income_remark = #{incomeRemark,jdbcType=VARCHAR},
+      User_id = #{userId,jdbcType=INTEGER}
+    where Income_id = #{incomeId,jdbcType=INTEGER}
+  </update>
+</mapper>

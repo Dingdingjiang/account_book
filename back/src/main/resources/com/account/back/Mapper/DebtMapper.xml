@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.account.back.Mapper.DebtMapper">
+  <resultMap id="BaseResultMap" type="com.account.back.Proj.Debt">
+    <id column="Debt_id" jdbcType="INTEGER" property="debtId" />
+    <result column="Debt_name" jdbcType="VARCHAR" property="debtName" />
+    <result column="Debt_account" jdbcType="VARCHAR" property="debtAccount" />
+    <result column="Debt_moneyNum" jdbcType="DOUBLE" property="debtMoneynum" />
+    <result column="Debt_date" jdbcType="TIMESTAMP" property="debtDate" />
+    <result column="Debt_remark" jdbcType="VARCHAR" property="debtRemark" />
+    <result column="User_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Debt_id, Debt_name, Debt_account, Debt_moneyNum, Debt_date, Debt_remark, User_id
+  </sql>
+  <select id="selectByExample" parameterType="com.account.back.Proj.DebtExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from debt
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from debt
+    where Debt_id = #{debtId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from debt
+    where Debt_id = #{debtId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.account.back.Proj.DebtExample">
+    delete from debt
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.account.back.Proj.Debt">
+    insert into debt (Debt_id, Debt_name, Debt_account, 
+      Debt_moneyNum, Debt_date, Debt_remark, 
+      User_id)
+    values (#{debtId,jdbcType=INTEGER}, #{debtName,jdbcType=VARCHAR}, #{debtAccount,jdbcType=VARCHAR}, 
+      #{debtMoneynum,jdbcType=DOUBLE}, #{debtDate,jdbcType=TIMESTAMP}, #{debtRemark,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.account.back.Proj.Debt">
+    insert into debt
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="debtId != null">
+        Debt_id,
+      </if>
+      <if test="debtName != null">
+        Debt_name,
+      </if>
+      <if test="debtAccount != null">
+        Debt_account,
+      </if>
+      <if test="debtMoneynum != null">
+        Debt_moneyNum,
+      </if>
+      <if test="debtDate != null">
+        Debt_date,
+      </if>
+      <if test="debtRemark != null">
+        Debt_remark,
+      </if>
+      <if test="userId != null">
+        User_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="debtId != null">
+        #{debtId,jdbcType=INTEGER},
+      </if>
+      <if test="debtName != null">
+        #{debtName,jdbcType=VARCHAR},
+      </if>
+      <if test="debtAccount != null">
+        #{debtAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="debtMoneynum != null">
+        #{debtMoneynum,jdbcType=DOUBLE},
+      </if>
+      <if test="debtDate != null">
+        #{debtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="debtRemark != null">
+        #{debtRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.account.back.Proj.DebtExample" resultType="java.lang.Long">
+    select count(*) from debt
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update debt
+    <set>
+      <if test="record.debtId != null">
+        Debt_id = #{record.debtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.debtName != null">
+        Debt_name = #{record.debtName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.debtAccount != null">
+        Debt_account = #{record.debtAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.debtMoneynum != null">
+        Debt_moneyNum = #{record.debtMoneynum,jdbcType=DOUBLE},
+      </if>
+      <if test="record.debtDate != null">
+        Debt_date = #{record.debtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.debtRemark != null">
+        Debt_remark = #{record.debtRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        User_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update debt
+    set Debt_id = #{record.debtId,jdbcType=INTEGER},
+      Debt_name = #{record.debtName,jdbcType=VARCHAR},
+      Debt_account = #{record.debtAccount,jdbcType=VARCHAR},
+      Debt_moneyNum = #{record.debtMoneynum,jdbcType=DOUBLE},
+      Debt_date = #{record.debtDate,jdbcType=TIMESTAMP},
+      Debt_remark = #{record.debtRemark,jdbcType=VARCHAR},
+      User_id = #{record.userId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.account.back.Proj.Debt">
+    update debt
+    <set>
+      <if test="debtName != null">
+        Debt_name = #{debtName,jdbcType=VARCHAR},
+      </if>
+      <if test="debtAccount != null">
+        Debt_account = #{debtAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="debtMoneynum != null">
+        Debt_moneyNum = #{debtMoneynum,jdbcType=DOUBLE},
+      </if>
+      <if test="debtDate != null">
+        Debt_date = #{debtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="debtRemark != null">
+        Debt_remark = #{debtRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        User_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Debt_id = #{debtId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.account.back.Proj.Debt">
+    update debt
+    set Debt_name = #{debtName,jdbcType=VARCHAR},
+      Debt_account = #{debtAccount,jdbcType=VARCHAR},
+      Debt_moneyNum = #{debtMoneynum,jdbcType=DOUBLE},
+      Debt_date = #{debtDate,jdbcType=TIMESTAMP},
+      Debt_remark = #{debtRemark,jdbcType=VARCHAR},
+      User_id = #{userId,jdbcType=INTEGER}
+    where Debt_id = #{debtId,jdbcType=INTEGER}
+  </update>
+</mapper>
