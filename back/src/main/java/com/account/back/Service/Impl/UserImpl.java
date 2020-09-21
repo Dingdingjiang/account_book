@@ -5,9 +5,11 @@ import com.account.back.Proj.User;
 import com.account.back.Service.UserService;
 import com.account.back.Util.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service("UserService")
 public class UserImpl implements UserService {
     @Autowired
     private UserMapper userMapper;

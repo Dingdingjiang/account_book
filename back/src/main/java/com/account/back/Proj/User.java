@@ -1,7 +1,10 @@
 package com.account.back.Proj;
 
+
 public class User {
+
     private Integer userId;
+
 
     private String userName;
 
